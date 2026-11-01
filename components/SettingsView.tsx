@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import TagManagerModal from './TagManagerModal';
 import MoodManager from './MoodManager';
+import AutoBackupSettings from './AutoBackupSettings';
 import { clearData, getAllTags, saveCustomTag, toggleTagHidden, getNotificationTimes, saveNotificationTimes, getNavLabelsEnabled, setNavLabelsEnabled, getTagColorsEnabled, setTagColorsEnabled, getCustomMoods, restoreBackupData } from '../services/storage';
 import {
     initializeNotifications,
@@ -13,10 +14,17 @@ import {
     snoozeNotification
 } from '../services/notificationService';
 import { saveAndShareBackup, isGoogleDriveConfigured, getGoogleAuthUrl } from '../services/driveBackupService';
-import { Moon, Sun, Trash2, Shield, User, PenLine, Tag as TagIcon, Plus, X as XIcon, ExternalLink, Bell, Clock, Palette, Download, Upload, FileText, Cloud, LayoutGrid, Pill, Smile, Coffee } from 'lucide-react';
+import { Moon, Sun, Trash2, Shield, User, PenLine, Tag as TagIcon, Plus, X as XIcon, ChevronRight, Bell, Clock, Palette, Download, Upload, FileText, Cloud, LayoutGrid, Pill, Smile, Coffee, Heart } from 'lucide-react';
 import { Capacitor } from '@capacitor/core';
 import { App as CapacitorApp } from '@capacitor/app';
 import { Tag } from '../types';
+
+// GitHub mark (lucide's brand icons are deprecated). Path from simpleicons.org.
+const GithubIcon = ({ size = 16 }: { size?: number }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+    </svg>
+);
 
 interface SettingsViewProps {
     isDarkMode: boolean;
@@ -269,28 +277,38 @@ const SettingsView: React.FC<SettingsViewProps> = ({
                 />
                 <h1 className="text-2xl font-bold text-warmGray-dark dark:text-nearWhite mb-1">Vibecheck</h1>
                 <p className="text-sm font-semibold text-brand/80">Private Mood Tracker</p>
+                <p className="text-xs text-warmGray-medium dark:text-warmGray-light/60">Developed by: <a href="https://aradar.top/" target="_blank" rel="noopener noreferrer" className="text-brand hover:underline font-semibold">aradar46</a></p>
             </div>
 
-            {/* Support Open Source / Ko-fi */}
-            <section className="bg-amber-500/10 dark:bg-amber-500/15 p-5 rounded-3xl border border-amber-500/30 shadow-sm transition-all hover:border-amber-500/50">
-                <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-2xl bg-amber-500 text-white flex items-center justify-center shadow-md shadow-amber-500/20 shrink-0">
-                            <Coffee size={20} />
-                        </div>
-                        <div>
-                            <h3 className="font-bold text-sm text-warmGray dark:text-nearWhite">Support Open Source</h3>
-                            <p className="text-xs text-warmGray-medium dark:text-warmGray-light/70">100% Free, Ad-free & Private</p>
-                        </div>
+            {/* Support Open Source: Ko-fi + GitHub star */}
+            <section className="bg-white dark:bg-navy-surface p-5 rounded-3xl shadow-sm border border-warmGray-light/50 dark:border-navy-border space-y-4">
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-2xl bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0">
+                        <Heart size={20} />
                     </div>
+                    <div className="min-w-0">
+                        <h3 className="font-bold text-warmGray dark:text-nearWhite">Support Open Source</h3>
+                        <p className="text-xs text-warmGray-medium dark:text-warmGray-light/70">Free, ad-free and private. Always.</p>
+                    </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
                     <a
                         href="https://ko-fi.com/aradar46"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs rounded-xl shadow-md shadow-amber-500/20 transition-all flex items-center gap-1.5 shrink-0 active:scale-95"
+                        className="flex items-center justify-center gap-2 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold transition-all active:scale-95"
                     >
-                        <span>Buy a Coffee</span>
-                        <ExternalLink size={13} />
+                        <Coffee size={16} />
+                        Buy a coffee
+                    </a>
+                    <a
+                        href="https://github.com/aradar46/Vibecheck-Private-Mood-Tracker"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 py-3 rounded-xl bg-cream dark:bg-navy border border-warmGray-light/50 dark:border-navy-border text-warmGray dark:text-nearWhite text-sm font-bold transition-all active:scale-95"
+                    >
+                        <GithubIcon size={16} />
+                        Star on GitHub
                     </a>
                 </div>
             </section>
@@ -519,7 +537,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({
                             <p className="text-xs text-warmGray-medium dark:text-warmGray-light/70">Add, edit, hide or delete tags</p>
                         </div>
                     </div>
-                    <ExternalLink size={16} className="text-warmGray-medium group-hover:text-brand transition-colors" />
+                    <ChevronRight size={18} className="text-warmGray-medium group-hover:text-brand transition-colors" />
                 </button>
 
                 <div className="flex items-center justify-between">
@@ -565,7 +583,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({
                             <p className="text-xs text-warmGray-medium dark:text-warmGray-light/70">Add specific feelings like "Focused", "Anxious"</p>
                         </div>
                     </div>
-                    <ExternalLink size={16} className="text-warmGray-medium group-hover:text-brand transition-colors" />
+                    <ChevronRight size={18} className="text-warmGray-medium group-hover:text-brand transition-colors" />
                 </button>
             </section>
 
@@ -598,11 +616,6 @@ const SettingsView: React.FC<SettingsViewProps> = ({
                 </h3>
 
                 <div className="space-y-4">
-                    <div className="p-4 bg-cream dark:bg-navy rounded-xl text-sm text-warmGray dark:text-nearWhite space-y-1">
-                        <p className="font-bold text-brand">🔒 100% Offline & Private</p>
-                        <p className="text-xs opacity-90">All your mood history is stored locally on your device. No account required, zero tracking, and no internet connection needed.</p>
-                    </div>
-
                     {/* Export Data as JSON */}
                     <button
                         onClick={handleExportJson}
@@ -626,6 +639,8 @@ const SettingsView: React.FC<SettingsViewProps> = ({
                         <Upload size={18} /> Import Backup
                     </button>
 
+                    <AutoBackupSettings />
+
                     {/* Privacy Policy Modal Trigger */}
                     <button
                         onClick={() => setShowPrivacyModal(true)}
@@ -635,7 +650,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({
                             <Shield size={18} className="text-brand" />
                             <span>Privacy Policy</span>
                         </div>
-                        <ExternalLink size={16} className="text-warmGray-medium group-hover:text-brand transition-colors" />
+                        <ChevronRight size={18} className="text-warmGray-medium group-hover:text-brand transition-colors" />
                     </button>
 
                     <Button
@@ -652,7 +667,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({
 
             {/* Offline Privacy Policy Modal */}
             {showPrivacyModal && (
-                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                <div className="fixed inset-0 !mt-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
                     <div className="bg-white dark:bg-navy-surface max-w-md w-full p-6 rounded-3xl space-y-4 shadow-xl border border-warmGray-light dark:border-navy-border max-h-[80vh] overflow-y-auto">
                         <div className="flex items-center justify-between">
                             <h3 className="text-lg font-bold text-warmGray dark:text-nearWhite flex items-center gap-2">
@@ -677,27 +692,11 @@ const SettingsView: React.FC<SettingsViewProps> = ({
                 </div>
             )}
 
-            {/* Offline Support Card */}
-            <section className="bg-white dark:bg-navy-surface p-5 rounded-3xl shadow-sm border border-warmGray-light/50 dark:border-navy-border">
-                <div className="flex items-center justify-between gap-3">
-                    <div>
-                        <h3 className="font-bold text-warmGray dark:text-nearWhite">Private & Offline App</h3>
-                        <p className="text-xs text-warmGray-medium dark:text-warmGray-light/70">100% Local & Open Source. Built for focus.</p>
-                    </div>
-                    <div className="bg-brand/10 text-brand px-3 py-1.5 rounded-xl text-xs font-bold">
-                        Android FOSS
-                    </div>
-                </div>
-            </section>
-
-            {/* Footer Links */}
-            <div className="flex flex-col items-center gap-2 pb-12">
-                <div className="flex items-center gap-2 mt-2">
-                    <span className="text-[10px] bg-warmGray-light/40 dark:bg-navy px-2 py-0.5 rounded-full text-warmGray-medium dark:text-warmGray-light font-medium">
-                        v1.0.0
-                    </span>
-                    <p className="text-[10px] text-warmGray-light/50">© 2026 VibeCheck</p>
-                </div>
+            {/* Footer */}
+            <div className="flex items-center justify-center gap-2 pb-12">
+                <span className="text-[10px] bg-warmGray-light/40 dark:bg-navy px-2 py-0.5 rounded-full text-warmGray-medium dark:text-warmGray-light font-medium">
+                    v{__APP_VERSION__}
+                </span>
             </div>
         </div>
     );

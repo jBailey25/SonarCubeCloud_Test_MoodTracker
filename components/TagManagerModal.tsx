@@ -189,7 +189,7 @@ const TagManagerModal: React.FC<TagManagerModalProps> = ({ onClose, onTagsUpdate
   });
 
   return (
-    <div className="fixed inset-0 z-[100] bg-cream dark:bg-navy flex flex-col animate-in fade-in duration-200">
+    <div className="fixed inset-0 !mt-0 z-[100] bg-cream dark:bg-navy flex flex-col animate-in fade-in duration-200">
       <div
         className="p-4 border-b border-warmGray-light/20 flex justify-between items-center bg-white dark:bg-navy-surface shadow-sm"
         style={{ paddingTop: 'max(1.5rem, calc(env(safe-area-inset-top) + 0.5rem))' }}

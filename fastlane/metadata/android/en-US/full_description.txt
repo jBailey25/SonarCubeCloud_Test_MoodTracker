@@ -8,6 +8,7 @@ Vibecheck is a private, local-first mood and symptom tracker designed for comple
 <li>Calendar Heatmap & Insights: Spot patterns and understand your mental health over time</li>
 <li>Custom Moods & Tags: Personalize your tracking experience</li>
 <li>JSON Data Export & Import: Complete ownership of your data</li>
+<li>Auto Backup: Pick a folder once and a backup is saved there every time you log</li>
 <li>100% Offline: Operates completely on-device without internet access</li>
 </ul>
 
@@ -15,4 +16,4 @@ Vibecheck is a private, local-first mood and symptom tracker designed for comple
 No data ever leaves your device. No cloud sync, no user accounts, no analytics, no ads, no third-party tracking SDKs.
 
 <b>Open Source</b>
-Licensed under the MIT License. Source code available on GitHub.
+Licensed under the GNU GPL v3 or later. Source code available on GitHub.

@@ -9,6 +9,7 @@ import SettingsView from './components/SettingsView';
 import DopamineMenu from './components/DopamineMenu';
 import ShadowBox from './components/ShadowBox';
 import OnboardingScreen from './screens/OnboardingScreen';
+import { runAutoBackup } from './services/autoBackup';
 import { LayoutGrid, Plus, Brain, Zap, Settings, Sparkles, RefreshCw, BarChart3, Wand2, Calendar } from 'lucide-react';
 import { QUICK_TIPS, MOODS } from './constants';
 import { App as CapacitorApp } from '@capacitor/app';
@@ -333,6 +334,7 @@ const App: React.FC = () => {
     const updated = await saveEntry(newEntry);
     setEntries(updated);
     setTotalEntries(updated.length);
+    runAutoBackup(); // not awaited: never slows down saving
 
     try {
       await Haptics.impact({ style: ImpactStyle.Medium });
@@ -356,6 +358,7 @@ const App: React.FC = () => {
     // 2. Update state immediately
     setEntries(updated);
     setTotalEntries(updated.length);
+    runAutoBackup();
 
     // Haptic feedback for delete
     try {
@@ -516,7 +519,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto bg-cream dark:bg-navy h-screen shadow-2xl overflow-hidden relative font-sans text-warmGray dark:text-nearWhite transition-colors duration-200">
+    <div className="w-full sm:max-w-md mx-auto bg-cream dark:bg-navy h-screen sm:shadow-2xl overflow-hidden relative font-sans text-warmGray dark:text-nearWhite transition-colors duration-200">
 
       {/* Main Content Area */}
       <main className="h-full">

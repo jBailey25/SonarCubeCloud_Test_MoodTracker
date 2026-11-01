@@ -691,7 +691,7 @@ const EntryForm: React.FC<EntryFormProps> = ({ onSubmit, onCancel, initialDate, 
           )}
         </section>
 
-        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md px-4 bg-cream dark:bg-navy pt-3 pb-6 space-y-3 border-t border-brand-light/60 dark:border-navy-border z-30"
+        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full sm:max-w-md px-4 bg-cream dark:bg-navy pt-3 pb-6 space-y-3 border-t border-brand-light/60 dark:border-navy-border z-30"
           style={{ paddingBottom: 'max(1.5rem, calc(env(safe-area-inset-bottom) + 0.75rem))' }}>
           <div className="flex flex-col items-center gap-2 text-center">
             <div className="flex items-center gap-2 text-green-600 dark:text-green-400 font-semibold">

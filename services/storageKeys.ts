@@ -10,3 +10,4 @@ export const NAV_LABELS_KEY = 'vibecheck_nav_labels';
 export const TAG_COLORS_KEY = 'vibecheck_tag_colors';
 export const CUSTOM_CATEGORIES_KEY = 'vibecheck_custom_categories';
 export const CUSTOM_MOODS_KEY = 'vibecheck_custom_moods';
+export const AUTO_BACKUP_KEY = 'vibecheck_auto_backup';

@@ -1,6 +1,5 @@
 # Vibecheck: Private Mood Tracker
 
--- I am looking for a maintainer.
 
 Vibecheck is a private, local-first, low-friction mood and symptom tracker designed for complete privacy and ease of use.
 
@@ -22,7 +21,8 @@ Vibecheck is a private, local-first, low-friction mood and symptom tracker desig
 - 📊 **Calendar Heatmap & Insights**: Visualize trends, energy levels, and mood patterns over time.
 - 🧘 **Dopamine Menu**: Grounding activities and gentle prompts for executive function and self-regulation.
 - 🔒 **100% Offline & Private**: All data remains on your device. No telemetry, no accounts, no ads, no internet required.
-- 🔓 **Fully Unlocked & Open Source**: Free of paywalls and subscriptions under the MIT License.
+- 💾 **Auto Backup (Android)**: Pick a folder once in Settings. Every time you log, Vibecheck saves a backup there (one file per day, last 7 kept). The files use the same JSON format as Export, so Import restores them.
+- 🔓 **Fully Unlocked & Open Source**: Free of paywalls and subscriptions under the GPLv3.
 
 ## Tech Stack
 
@@ -56,7 +56,6 @@ npx cap sync android
 cd android
 ./gradlew assembleRelease
 ```
-The output APK will be generated at `android/app/build/outputs/apk/release/app-release-unsigned.apk`.
 
 ## License
 

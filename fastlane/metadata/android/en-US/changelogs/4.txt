@@ -1,0 +1,7 @@
+Adds automatic backup and tidies up Settings.
+
+• Auto Backup: pick a folder in Settings and a backup is saved there every time you log. Restore it with Import.
+• Settings shows the real app version.
+• The app now fills the whole screen on phones with a small display size.
+• Manage Tags, Manage Moods and Privacy Policy no longer show a strip of the page behind them.
+• New support card with a Star on GitHub button.
